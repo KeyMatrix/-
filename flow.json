@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "id": "MetaDevStream",
+      "type": "env-agent",
+      "color": "#66CCFF"
+    }
+  ],
+  "links": [
+    {
+      "source": "GitHubEvents",
+      "target": "MetaDevStream",
+      "type": "stream",
+      "channel": "codespace-sync",
+      "description": "Передача сигналов разработки в Codespace."
+    },
+    {
+      "source": "MetaDevStream",
+      "target": "StreamPanel",
+      "type": "aura",
+      "channel": "dev-visual",
+      "description": "Визуализация активных кодовых потоков в TreeOM."
+    }
+  ]
+}
