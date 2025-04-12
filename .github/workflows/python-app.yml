@@ -1,0 +1,37 @@
+name: Python TreeOM Sync
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: TreeOM CLI Test
+        run: |
+          python treeom_cli.py --mode sync --source GitHubEvents
+
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: resonance-log
+          path: logs/*
